@@ -21,7 +21,7 @@ export class ConfirmComponent implements OnInit{
       })
 
       this.commonService.confirmPromise.subscribe((value)=>{
-        this.orderingData=value
+        this.orderingData=value        
       })
   }
 

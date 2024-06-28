@@ -31,7 +31,7 @@ export class DesignationFormComponent {
     private adminService: AdminServiceService
   ) {
     this.designationForm = fb.group({
-      designationName: ['', [Validators.required, Validators.maxLength(15)]],
+      designationName: ['', [Validators.required, Validators.maxLength(25)]],
     });
   }
 
@@ -49,24 +49,29 @@ export class DesignationFormComponent {
       );
       let data = {};
       const promise = new Promise((resolve, reject) => {
-        data = resolve;
+        data = {
+          resolve
+        };
       });
       this.commonService.confirmPromise.next(data);
 
-      // promise.then(() => {
-      //   this.adminService.addDesignation(this.designationForm.value).subscribe({
-      //     next:(res)=>{
-
-      //     },
-      //     error:(err)=>{
-
-      //     }
-      //   })
-      // });
+      promise.then(() => {
+        this.adminService.addDesignation(this.designationForm.value).subscribe({
+          next:(res)=>{
+            this.commonService.confirmbooleanBe.next(false)
+            this.commonService.confirmMessageBe.next('')
+          },
+          error:(err)=>{
+            this.commonService.confirmbooleanBe.next(false)
+            this.commonService.confirmMessageBe.next('')
+            console.log(err);
+          }
+        })
+      });
     } else {
       alert('field is blank or limit exceed');
     }
   }
 }
 
-// const not = this.designationForm?.value?.designationName?.replace(/\s+/g, '')
+

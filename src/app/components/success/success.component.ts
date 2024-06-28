@@ -15,13 +15,13 @@ export class SuccessComponent implements OnInit{
   constructor(private commonservice:CommonService) {}
 
   ngOnInit(): void {
-    this.commonservice.successMessage.subscribe(value=>{
+    this.commonservice.successMessageBe.subscribe(value=>{
       this.message=value
     })
   }
   
   Done(){
-    this.commonservice.successbooleanValue.next(false)
-    this.commonservice.successMessage.next('')
+    this.commonservice.successBooleanBe.next(false)
+    this.commonservice.successMessageBe.next('')
   }
 }

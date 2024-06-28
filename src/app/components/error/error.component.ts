@@ -15,14 +15,14 @@ export class ErrorComponent implements OnInit{
   constructor(private commonService:CommonService, private router:Router) {}
   
   ngOnInit(): void {
-    this.commonService.errorMessage.subscribe((value)=>{
+    this.commonService.errorMessageBe.subscribe((value)=>{
       this.message=value
     })
   }
 
   okey(){
-    this.commonService.ErrorbooleanValue.next(false)
-    this.commonService.errorMessage.next('')
+    this.commonService.errorBooleanBe.next(false)
+    this.commonService.errorMessageBe.next('')
     this.router.navigate(['/'])
   }
 

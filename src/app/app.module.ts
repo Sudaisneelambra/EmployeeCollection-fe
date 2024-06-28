@@ -8,7 +8,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmComponent } from './components/confirm/confirm.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
+import { CommonInterceptor } from './commonInterceptor';
+import { SuccessComponent } from './components/success/success.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +25,18 @@ import {HttpClientModule} from '@angular/common/http'
     LoadingComponent,
     BrowserAnimationsModule,
     ConfirmComponent,
+    LoadingComponent,
+    SuccessComponent,
+    ErrorComponent,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+     provide: HTTP_INTERCEPTORS,
+     useClass:CommonInterceptor,
+     multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
