@@ -19,6 +19,8 @@
 
 
   .sidebar{
+    position: fixed; /* or absolute */
+     z-index: 10; 
     transform: translateX(-100%);
     opacity: 0;
     transition: .5s  ease-in-out;

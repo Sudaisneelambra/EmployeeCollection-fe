@@ -6,6 +6,8 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { UsersListComponent } from './pages/users-list/users-list.component';
 import { AddDesignationComponent } from './pages/add-designation/add-designation.component';
 import { AddUsersComponent } from './pages/add-users/add-users.component';
+import { DesignationFormComponent } from './components/designation-form/designation-form.component';
+import {HttpClientModule} from '@angular/common/http'
 
 
 
@@ -14,12 +16,14 @@ import { AddUsersComponent } from './pages/add-users/add-users.component';
     AdminHomeComponent,
     UsersListComponent,
     AddDesignationComponent,
-    AddUsersComponent
+    AddUsersComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutes,
-    NavbarComponent
+    NavbarComponent,
+    DesignationFormComponent,
+    HttpClientModule
   ]
 })
 export class AdminModule { }
