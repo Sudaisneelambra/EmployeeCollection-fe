@@ -50,28 +50,27 @@ export class DesignationFormComponent {
       let data = {};
       const promise = new Promise((resolve, reject) => {
         data = {
-          resolve
+          resolve,
         };
       });
       this.commonService.confirmPromise.next(data);
 
       promise.then(() => {
         this.adminService.addDesignation(this.designationForm.value).subscribe({
-          next:(res)=>{
-            this.commonService.confirmbooleanBe.next(false)
-            this.commonService.confirmMessageBe.next('')
+          next: (res) => {
+            this.commonService.successBooleanBe.next(true)
+            this.commonService.successMessageBe.next(res.data);
+            this.commonService.confirmbooleanBe.next(false);
+            this.commonService.confirmMessageBe.next('');
           },
-          error:(err)=>{
-            this.commonService.confirmbooleanBe.next(false)
-            this.commonService.confirmMessageBe.next('')
-            console.log(err);
-          }
-        })
+          error: (err) => {
+            this.commonService.confirmbooleanBe.next(false);
+            this.commonService.confirmMessageBe.next('');
+          },
+        });
       });
     } else {
       alert('field is blank or limit exceed');
     }
   }
 }
-
-

@@ -8,6 +8,7 @@ import { AddDesignationComponent } from './pages/add-designation/add-designation
 import { AddUsersComponent } from './pages/add-users/add-users.component';
 import { DesignationFormComponent } from './components/designation-form/designation-form.component';
 import {HttpClientModule} from '@angular/common/http'
+import { UserAddFormComponent } from './components/user-add-form/user-add-form.component';
 
 
 
@@ -23,6 +24,7 @@ import {HttpClientModule} from '@angular/common/http'
     AdminRoutes,
     NavbarComponent,
     DesignationFormComponent,
+    UserAddFormComponent,
     HttpClientModule
   ]
 })

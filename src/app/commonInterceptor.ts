@@ -32,12 +32,6 @@ export class CommonInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap((event: HttpEvent<any>) => {
         this.commonService.loadingBooleanBe.next(false);
-        if (event instanceof HttpResponse) {
-          if (event.status === 200) {
-            this.commonService.successBooleanBe.next(true);
-            this.commonService.successMessageBe.next(event.body.message);
-          }
-        }
       }),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 404) {
@@ -46,6 +40,9 @@ export class CommonInterceptor implements HttpInterceptor {
         } else if (error.status === 409) {
             this.commonService.errorBooleanBe.next(true);
             this.commonService.errorMessageBe.next(error.error.message);
+        } else{
+            this.commonService.errorBooleanBe.next(true);
+            this.commonService.errorMessageBe.next('un wanted error please try again');
         }
         return throwError(error);
       })

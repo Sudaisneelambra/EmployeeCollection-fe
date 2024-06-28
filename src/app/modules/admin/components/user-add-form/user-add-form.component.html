@@ -1,1 +1,103 @@
-<p>user-add-form works!</p>
+<div class="!w-full border-2 flex justify-center">
+  <div class="main w-[600px] flex flex-col p-4 shadow-2xl rounded-lg">
+    <form [formGroup]="userForm" class="">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label class="!pb-[20px]">User Name</mat-label>
+        <input matInput formControlName="name" required class="!text-[green]" />
+        <mat-error
+          *ngIf="f['name'].errors?.['required']"
+          class="required-label text-[red]"
+          >This field Required*</mat-error
+        >
+      </mat-form-field>
+      <div class="age-phone w-full flex justify-between">
+        <mat-form-field appearance="fill" class="age w-[48%]">
+          <mat-label class="!pb-[20px]">Age</mat-label>
+          <input
+            matInput
+            formControlName="age"
+            type="number"
+            required
+            class="!text-[green]"
+          />
+          <mat-error
+            *ngIf="f['age'].errors?.['required']"
+            class="required-label text-[red]"
+            >This field Required*</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="phone w-[48%]">
+          <mat-label class="!pb-[20px]">Phone Number</mat-label>
+          <input
+            matInput
+            formControlName="phoneNumber"
+            required
+            type="number"
+            class="!text-[green]"
+          />
+          <mat-error
+            *ngIf="f['phoneNumber'].errors?.['required']"
+            class="required-label text-[red]"
+            >This field Required*</mat-error
+          >
+          <mat-error
+            *ngIf="
+              f['phoneNumber'].hasError('minlength') &&
+              (f['phoneNumber'].touched || f['phoneNumber'].dirty)
+            "
+            class="text-[red]"
+            >Must be 10 digits</mat-error
+          >
+          <mat-error
+            *ngIf="
+              f['phoneNumber'].hasError('maxlength') &&
+              (f['phoneNumber'].touched || f['phoneNumber'].dirty)
+            "
+            class="text-[red]"
+            >Must be 10 digits</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <mat-form-field class="w-full">
+        <mat-label>Designation</mat-label>
+        <mat-select formControlName="designation">
+          <mat-option
+            *ngFor="let data of designations"
+            [value]="'data?.designationName'"
+            >{{ data?.designationName }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="email w-full">
+        <mat-label class="!pb-[20px]">Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          required
+          class="!text-[green]"
+        />
+        <mat-error
+          *ngIf="f['email'].errors?.['required']"
+          class="required-label text-[red]"
+          >This field Required*</mat-error
+        >
+        <mat-error
+          *ngIf="f['email'].errors?.['email']"
+          class="required-label text-[red]"
+          >Enter in correct Formate*</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label>Address</mat-label>
+        <textarea matInput formControlName="address" ></textarea>
+        <mat-error
+        *ngIf="f['address'].errors?.['required']"
+        class="required-label text-[red]"
+        >This field Required*</mat-error
+      >
+        <mat-error class="maxlength-label" *ngIf="f['address'].invalid && f['address'].hasError('maxlength') && (f['address'].touched || f['address'].dirty)" class="text-[red]">Maximum length exceeded (100 characters)</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
