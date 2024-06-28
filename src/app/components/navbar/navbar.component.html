@@ -1,0 +1,38 @@
+<nav
+  class="nav-bar w-full h-[60px] flex justify-between px-[25px] sm:px-10 items-center border-b-[1px] bg-[#c9c7c7] border-[#c9c7c7] relative"
+>
+  <div class="name font-bold text-[22px] sm:text-[28px] cursor-pointer">
+    Cordova
+  </div>
+  <div class="side-links flex sm:gap-10 gap-5 h-full items-center ">
+    <ul class="uls flex gap-8">
+      <li
+        *ngFor="let li of navlinks"
+        class="cursor-pointer font-bold hover:text-red-500"
+      >
+        <a routerLink="{{ li?.Link }}">{{ li.name }}</a>
+      </li>
+    </ul>
+    <div
+      class="h-[45px] w-[45px] rounded-full bg-[#d9d9d9] grid place-items-center cursor-pointer"
+    >
+      <i class="fa-solid fa-right-from-bracket text-[20px]" title="Logout"></i>
+    </div>
+  </div>
+  <div
+    class="menu-bar h-[45px] w-[45px] rounded-full bg-[#d9d9d9] place-items-center cursor-pointer hidden"
+    (click)="showSidebarfn()"
+  >
+    <i class="fa-solid fa-bars"></i>
+  </div>
+  <div
+    class="sidebar absolute w-[280px] top-0  left-0  h-screen transform transition-all duration-300  bg-[#c9c7c7]"
+    [ngClass]="{ 'show-sidebar': bool && showSidebar }"
+  >
+    <h1 class="font-bold h-[60px] text-[22px] flex items-center pl-4 ">Cordova</h1>
+    <h1 *ngFor="let li of navlinks" class="w-full flex justify-center shadow-md items-center py-5" routerLink="{{li?.Link}}"  (click)="showSidebarfn()">
+        {{li?.name}}
+    </h1>
+    <h1 class="w-full flex justify-center shadow-md items-center py-5 gap-2">Logout <i class="fa-solid fa-right-from-bracket text-[20px]" title="Logout"></i></h1>
+  </div>
+</nav>
