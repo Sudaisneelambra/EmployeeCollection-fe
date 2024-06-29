@@ -1,4 +1,3 @@
-// jwt.interceptor.ts
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -20,20 +19,29 @@ export class CommonInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const one = localStorage.getItem('token');
-    request = request.clone({
+    const token = localStorage.getItem('token')    
+     request = request.clone({
       setHeaders: {
-        Authorization: `bearer${one}`,
+        Authorization: `Bearer ${token}`,
       },
-    });
+    })
 
-    this.commonService.loadingBooleanBe.next(true);
+    setTimeout(() => {
+        this.commonService.loadingBooleanBe.next(true);   
+    });
 
     return next.handle(request).pipe(
       tap((event: HttpEvent<any>) => {
-        this.commonService.loadingBooleanBe.next(false);
+        if (event instanceof HttpResponse) {
+          if (event.body && event.body.expiry) {
+            alert('JWT Expired. Please login again');
+            localStorage.clear()
+            this.router.navigate(['/']);
+          }
+        }
       }),
       catchError((error: HttpErrorResponse) => {
+        this.commonService.loadingBooleanBe.next(false)
         if (error.status === 404) {
             this.commonService.errorBooleanBe.next(true);
             this.commonService.errorMessageBe.next(error.error.message);

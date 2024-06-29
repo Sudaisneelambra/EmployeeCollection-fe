@@ -8,6 +8,7 @@ import { RouterLink } from 'src/app/interfaces/nav-lnks.interface';
 })
 export class AdminHomeComponent {
 
+  /**navLinks for nav bar */
   navLinks:RouterLink[]=[
     {
       name:'Add Designation',
@@ -16,6 +17,14 @@ export class AdminHomeComponent {
     {
       name:'Add User',
       Link:'/admin/add-users'
+    },
+    {
+      name:'Add Location',
+      Link:'/admin/add-locations'
+    },
+    {
+      name:'Deleted Users',
+      Link:'/admin/deleted-users'
     }
   ]
 

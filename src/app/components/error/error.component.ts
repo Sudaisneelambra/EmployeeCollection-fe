@@ -10,20 +10,24 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit{
-
+/**variables */
   message:any
+
+  /**injecting services and dependencies */
   constructor(private commonService:CommonService, private router:Router) {}
   
+
   ngOnInit(): void {
-    this.commonService.errorMessageBe.subscribe((value)=>{
-      this.message=value
-    })
+        this.commonService.errorMessageBe.subscribe((value)=>{
+            this.message=value
+        })
   }
 
+  /**error click Okey */
   okey(){
-    this.commonService.errorBooleanBe.next(false)
-    this.commonService.errorMessageBe.next('')
-    this.router.navigate(['/'])
+        this.commonService.errorBooleanBe.next(false)
+        this.commonService.errorMessageBe.next('')
+        this.router.navigate(['/'])
   }
 
 }

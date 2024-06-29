@@ -1,0 +1,24 @@
+<div class="main w-full h-screen flex justify-center items-center bg-[#111827]">
+  <form [formGroup]="loginForm"
+    class="form w-[700px] h-[400px] bg-[#1f2937]  rounded-lg p-6 flex flex-col  items-center justify-around"
+  >
+    <h1 class="w-full text-center font-bold text-[25px] text-[white]">Login</h1>
+    <mat-form-field class="w-full">
+      <mat-label>Email Or userId </mat-label>
+      <input matInput required formControlName="email" class="bg-[#374151]"/>
+      <mat-error *ngIf="loginForm.controls['email'].hasError('required') && (loginForm.controls['email'].touched || loginForm.controls['email'].dirty)">
+        Email is Required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+        <mat-label>Password</mat-label>
+        <input matInput required formControlName="password"/>
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required') && (loginForm.controls['email'].touched || loginForm.controls['email'].dirty)">
+          Email is Required
+        </mat-error>
+      </mat-form-field>
+      <div class="h-[50px] w-[70%]">
+        <app-button [buttonClass]="{'background-color':'orange'}" (click)="onClick()">Login</app-button>
+      </div>
+  </form>
+</div>

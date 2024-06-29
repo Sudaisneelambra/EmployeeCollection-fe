@@ -1,0 +1,17 @@
+<div class="container max-w-[600px] my-0 mx-auto bg-[#fff] p-[20px] rounded-[8px] mt-10">
+    <h1 class="font-bold text-[25px]">{{title | uppercase}}</h1>
+    <div class="user-info">
+        <div><span class="label">Name:</span> {{data?.name}}</div>
+        <div><span class="label">Age:</span> {{data?.age}}</div>
+        <div><span class="label">Phone Number:</span> {{data?.phoneNumber}}</div>
+        <div><span class="label">Address:</span> {{data?.address}}</div>
+        <div><span class="label">User ID:</span> {{data?.userId}}</div>
+        <div><span class="label">Email:</span> {{data?.email}}</div>
+        <div><span class="label">Designation:</span> {{data?.designation}}</div>
+        <div><span class="label">Location:</span> {{data?.location}}</div>
+        <div class="flex !p-0 h-[40px] justify-around !border-none !bg-transparent !mt-[20px]" *ngIf="!data?.delateStatus && admin">
+            <app-button [buttonClass]="{'background-color':'gray'}">Edit</app-button>
+            <app-button [buttonClass]="{'background-color':'gray'}" (click)="deleteUser(data?._id)">delete</app-button>
+        </div>
+    </div>
+</div>

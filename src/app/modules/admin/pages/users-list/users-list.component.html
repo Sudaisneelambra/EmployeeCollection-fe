@@ -1,1 +1,36 @@
-<p>users-list works!</p>
+<h1 class="p-3 font-bold text-[26px] text-[#21317e]">Users List</h1>
+<div
+  class="sin pl-3 gap-2 flex h-auto justify-evenly items-center bg-[#f5f5f5]"
+>
+  <h1 class="font-bold text-[25px]">Filter</h1>
+  <mat-form-field class="">
+    <mat-label>Location</mat-label>
+    <mat-select [(ngModel)]="filterForm.location" (selectionChange)="applyFilter()">
+      <mat-option *ngFor="let data of location" [value]="data?.locationName">{{
+        data?.locationName
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="">
+    <mat-label>Designation</mat-label>
+    <mat-select [(ngModel)]="filterForm.designation" (selectionChange)="applyFilter()">
+      <mat-option
+        *ngFor="let data of designations"
+        [value]="data?.designationName"
+        >{{ data?.designationName }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <app-button class="!h-[40px]" (click)="reset()">Reset</app-button>
+</div>
+<div class="main w-full h-full gap-3 p-3">
+  <ng-container *ngIf="filteredUsers && filteredUsers?.[0]; else nodata">
+    <app-user-card
+      *ngFor="let data of filteredUsers"
+      [data]="data"
+    ></app-user-card>
+  </ng-container>
+  <ng-template #nodata>
+    <h1 class="text-[30px] font-bold text-left w-full">No Data Found</h1>
+  </ng-template>
+</div>

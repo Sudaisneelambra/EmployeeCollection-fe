@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
       })
 
       this.commonService.loadingBooleanBe.subscribe((val:boolean)=>{
-        this.loadingBoolean=val
+        this.loadingBoolean=val        
       })
 
       this.commonService.successBooleanBe.subscribe((val:boolean)=>{
@@ -32,5 +32,7 @@ export class AppComponent implements OnInit{
       this.commonService.errorBooleanBe.subscribe((val:boolean)=>{
         this.errorboolean=val
       })
+
+      this.commonService.decodetoken()
   }
 }

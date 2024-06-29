@@ -1,0 +1,9 @@
+<h1 class="p-3 font-bold text-[26px] text-[#21317e]">Deleted Users List</h1>
+<div class="main w-full h-full gap-3 p-3">
+    <ng-container *ngIf="deletedusers && deletedusers?.length>0; else noData">
+        <app-user-card *ngFor="let data of deletedusers" [data]="data"></app-user-card>
+    </ng-container>
+    <ng-template #noData>
+        <h1 class="font-bold text-[30px] text-left">No Data Found</h1>
+    </ng-template>
+</div>

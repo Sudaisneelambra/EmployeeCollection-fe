@@ -1,13 +1,13 @@
 <div class="w-full flex justify-center items-center " >
     <form [formGroup]="designationForm" class="form-field rounded-md shadow-2xl  flex flex-col justify-center items-center w-[500px]  p-[30px]">
         <mat-form-field appearance="fill" class="  w-full">
-          <mat-label class="!pb-[20px]">Designation Name</mat-label>
-          <input matInput formControlName="designationName" required class=" mt-2 !text-[green]" >
+            <mat-label class="!pb-[20px]">Designation Name</mat-label>
+            <input matInput formControlName="designationName" required class=" mt-2 !text-[green]" >
             <mat-error *ngIf="f['designationName'].errors?.['required']" class="required-label text-[red]">This field Required*</mat-error>
-           
+            <mat-error class="maxlength-label" *ngIf="f['designationName'].invalid && f['designationName'].hasError('maxlength') && (f['designationName'].touched || f['designationName'].dirty)" class="text-[red]">Maximum length exceeded (25 characters)</mat-error>
         </mat-form-field>
         <div class="w-[150px] h-[50px] mt-5">
-            <app-button [buttonvalue]="'submit'" (click)="onSubmit()"></app-button>
+            <app-button (click)="onSubmit()">Submit</app-button>
         </div>
     </form>
-</div> <mat-error class="maxlength-label" *ngIf="f['designationName'].invalid && f['designationName'].hasError('maxlength') && (f['designationName'].touched || f['designationName'].dirty)" class="text-[red]">Maximum length exceeded (25 characters)</mat-error>
+</div>

@@ -26,16 +26,16 @@ export class DesignationFormComponent {
   designationForm!: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private commonService: CommonService,
-    private adminService: AdminServiceService
+        private fb: FormBuilder,
+        private commonService: CommonService,
+        private adminService: AdminServiceService
   ) {
-    this.designationForm = fb.group({
-      designationName: ['', [Validators.required, Validators.maxLength(25)]],
-    });
+        this.designationForm = fb.group({
+        designationName: ['', [Validators.required, Validators.maxLength(25)]],
+        });
   }
 
-  // get the controll of form
+  /**get the controll of form */
   get f() {
     return this.designationForm.controls;
   }
@@ -43,32 +43,32 @@ export class DesignationFormComponent {
   // onsubmit
   onSubmit() {
     if (this.designationForm.valid) {
-      this.commonService.confirmbooleanBe.next(true);
-      this.commonService.confirmMessageBe.next(
-        'Are you sure to add this Designation in your database'
-      );
-      let data = {};
-      const promise = new Promise((resolve, reject) => {
-        data = {
-          resolve,
-        };
-      });
-      this.commonService.confirmPromise.next(data);
-
-      promise.then(() => {
-        this.adminService.addDesignation(this.designationForm.value).subscribe({
-          next: (res) => {
-            this.commonService.successBooleanBe.next(true)
-            this.commonService.successMessageBe.next(res.data);
-            this.commonService.confirmbooleanBe.next(false);
-            this.commonService.confirmMessageBe.next('');
-          },
-          error: (err) => {
-            this.commonService.confirmbooleanBe.next(false);
-            this.commonService.confirmMessageBe.next('');
-          },
+        this.commonService.confirmbooleanBe.next(true);
+        this.commonService.confirmMessageBe.next(
+            'Are you sure to add this Designation in your database'
+        );
+        let data = {};
+        const promise = new Promise((resolve, reject) => {
+            data = {
+            resolve,
+            };
         });
-      });
+        this.commonService.confirmPromise.next(data);
+        /**promise perform the task */
+        promise.then(() => {
+            this.adminService.addDesignation(this.designationForm.value).subscribe({
+            next: (res) => {
+                this.designationForm.reset()
+                this.commonService.loadingBooleanBe.next(false)
+                this.commonService.successBooleanBe.next(true)
+                this.commonService.successMessageBe.next(res.message);
+            },
+            error: (err) => {
+                this.commonService.confirmbooleanBe.next(false);
+                this.commonService.confirmMessageBe.next('');
+            },
+            });
+        });
     } else {
       alert('field is blank or limit exceed');
     }

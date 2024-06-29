@@ -12,11 +12,14 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { CommonInterceptor } from './commonInterceptor';
 import { SuccessComponent } from './components/success/success.component';
 import { ErrorComponent } from './components/error/error.component';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,10 @@ import { ErrorComponent } from './components/error/error.component';
     LoadingComponent,
     SuccessComponent,
     ErrorComponent,
-    HttpClientModule
+    MatInputModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    ButtonComponent
   ],
   providers: [
     {
