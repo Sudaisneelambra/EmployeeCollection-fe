@@ -3,6 +3,8 @@
 	Input,
 	ChangeDetectionStrategy,
 	signal,
+	OnInit,
+	OnChanges,
 	} from '@angular/core';
 	import { CommonModule } from '@angular/common';
 	import {
@@ -41,12 +43,13 @@
 	})
 
 
-	export class UserAddFormComponent {
+	export class UserAddFormComponent implements OnChanges{
 	
 	hide = signal(true);
 	userForm!: FormGroup;
 	@Input() designations!: Designation[];
 	@Input() location!: Location[];
+	@Input() data !:any
 
 	buttonClass = {
 		'background-color': 'red',
@@ -75,6 +78,14 @@
 		userId: [{ value: '', disabled: true }, Validators.required],
 		password: ['', Validators.required],
 		});
+	}
+	
+
+	/**oninit */
+	ngOnChanges(): void {
+		if(this.data){
+			this.userForm.patchValue(this.data);
+		}	
 	}
 
 	/**get the controll of form */
@@ -143,25 +154,46 @@
 			resolve,
 			};
 			});
-		this.commonService.confirmPromise.next(data);
-		this.commonService.confirmbooleanBe.next(true)
-		this.commonService.confirmMessageBe.next('Are you sure to add this employee')
+			this.commonService.confirmbooleanBe.next(true)
+			this.commonService.confirmPromise.next(data);
 
-		/**promise perform the task */
-		promise.then(() => {
-			this.adminService.addUser(datas).subscribe({
-			next: (res) => {
-				this.userForm.reset()
-				this.commonService.loadingBooleanBe.next(false)
-				this.commonService.successBooleanBe.next(true)
-				this.commonService.successMessageBe.next(res.message);
-			},
-			error: (err) => {
-				this.commonService.confirmbooleanBe.next(false)
-				this.commonService.confirmMessageBe.next('')
-			},
-			});
-		});
+			if(!this.data){
+				this.commonService.confirmMessageBe.next('Are you sure to add this employee')
+				/**promise perform the task */
+				promise.then(() => {
+					this.adminService.addUser(datas).subscribe({
+					next: (res) => {
+						this.userForm.reset()
+						this.commonService.loadingBooleanBe.next(false)
+						this.commonService.successBooleanBe.next(true)
+						this.commonService.successMessageBe.next(res.message);
+					},
+					error: (err) => {
+						this.commonService.confirmbooleanBe.next(false)
+						this.commonService.confirmMessageBe.next('')
+					},
+					});
+				});
+			} else {
+				this.commonService.confirmMessageBe.next('Are you sure to update this employee')
+				/**promise perform the task */
+				promise.then(() => {
+					this.adminService.editUser(datas,this.data._id).subscribe({
+					next: (res) => {
+						this.userForm.reset()
+						this.commonService.loadingBooleanBe.next(false)
+						this.commonService.successBooleanBe.next(true)
+						this.commonService.successMessageBe.next(res.message);
+					},
+					error: (err) => {
+						this.commonService.confirmbooleanBe.next(false)
+						this.commonService.confirmMessageBe.next('')
+					},
+					});
+				});
+			}
+
+		
 		} else {
 			alert('fill the fields');
 		}

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { CommonService } from 'src/app/services/common.service';
 import { AdminServiceService } from '../../modules/admin/services/admin-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-data',
@@ -20,7 +21,8 @@ export class SingleDataComponent {
 
   constructor (
     private commonService:CommonService,
-    private adminService:AdminServiceService
+    private adminService:AdminServiceService,
+	private router:Router
   ) {}
 
   /**delete user */
@@ -48,6 +50,10 @@ export class SingleDataComponent {
             }
             })
       })
+  }
+
+  editUser(id:any){
+	this.router.navigate(['/admin/add-users'],{queryParams:{id:id}})
   }
 
 }

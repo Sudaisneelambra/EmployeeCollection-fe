@@ -122,7 +122,7 @@
 				<app-button (click)="generateId($event)">Generate</app-button>
 			</div>
 		</div>
-		<mat-form-field class="w-full">
+		<mat-form-field class="w-full" *ngIf="!data">
 			<mat-label>Enter your password</mat-label>
 			<input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
 			<button
@@ -141,7 +141,7 @@
 		>
 		</mat-form-field>
 		<div class="h-[50px] mt-3">
-			<app-button [buttonClass]="buttonClass" (click)="onSubmit()">Submit</app-button>
+			<app-button [buttonClass]="buttonClass" (click)="onSubmit()">{{data ? 'Edit' :'Submit'}}</app-button>
 		</div>
 		</form>
 	</div>

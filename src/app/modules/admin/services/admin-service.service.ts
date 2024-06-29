@@ -38,6 +38,11 @@ addUser(data:any):Observable<any>{
     return this.http.post(`${this.api}/admin/addUser`,data);
 }
 
+/**add user */
+editUser(data:any,id:any):Observable<any>{
+    return this.http.patch(`${this.api}/admin/editUser`,{...data,id});
+}
+
 /**get userslist */
 getUsers():Observable<any>{
     return this.http.get(`${this.api}/admin/getUsers`)

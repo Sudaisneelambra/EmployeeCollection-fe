@@ -10,7 +10,7 @@
         <div><span class="label">Designation:</span> {{data?.designation}}</div>
         <div><span class="label">Location:</span> {{data?.location}}</div>
         <div class="flex !p-0 h-[40px] justify-around !border-none !bg-transparent !mt-[20px]" *ngIf="!data?.delateStatus && admin">
-            <app-button [buttonClass]="{'background-color':'gray'}">Edit</app-button>
+            <app-button [buttonClass]="{'background-color':'gray'}" (click)="editUser(data?._id)">Edit</app-button>
             <app-button [buttonClass]="{'background-color':'gray'}" (click)="deleteUser(data?._id)">delete</app-button>
         </div>
     </div>
